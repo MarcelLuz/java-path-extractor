@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-class ExtractFeaturesTask implements Callable<Void> {
+public class ExtractFeaturesTask implements Callable<Void> {
     private final CommandLineValues m_CommandLineValues;
     private final Path filePath;
 
@@ -85,5 +85,13 @@ class ExtractFeaturesTask implements Callable<Void> {
 
         }
         return StringUtils.join(methodsOutputs, "\n");
+    }
+
+    public CommandLineValues getM_CommandLineValues() {
+        return m_CommandLineValues;
+    }
+
+    public Path getFilePath() {
+        return filePath;
     }
 }

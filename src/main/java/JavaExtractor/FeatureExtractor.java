@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SuppressWarnings("StringEquality")
-class FeatureExtractor {
+public class FeatureExtractor {
     private final static String upSymbol = "|";
     private final static String downSymbol = "|";
     private static final Set<String> s_ParentTypeToAddChildId = Stream
