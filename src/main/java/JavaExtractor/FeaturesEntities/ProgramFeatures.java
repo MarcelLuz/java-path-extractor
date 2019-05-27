@@ -29,6 +29,14 @@ public class ProgramFeatures {
         features.add(newRelation);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<ProgramRelation> getFeatures() {
+        return features;
+    }
+
     @JsonIgnore
     public boolean isEmpty() {
         return features.isEmpty();

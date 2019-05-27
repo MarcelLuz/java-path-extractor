@@ -15,4 +15,16 @@ public class ProgramRelation {
         return String.format("%s,%s,%s", m_Source.getName(), m_Path,
                 m_Target.getName());
     }
+
+    public Property getM_Source() {
+        return m_Source;
+    }
+
+    public Property getM_Target() {
+        return m_Target;
+    }
+
+    public String getM_Path() {
+        return m_Path;
+    }
 }
