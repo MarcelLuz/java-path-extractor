@@ -24,8 +24,8 @@ public class ProgramFeatures {
         return stringBuilder.toString();
     }
 
-    public void addFeature(Property source, String path, Property target) {
-        ProgramRelation newRelation = new ProgramRelation(source, target, path);
+    public void addFeature(Property source, String path, String longPath, Property target) {
+        ProgramRelation newRelation = new ProgramRelation(source, target, path, longPath);
         features.add(newRelation);
     }
 

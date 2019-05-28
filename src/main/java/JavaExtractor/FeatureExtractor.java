@@ -96,18 +96,19 @@ public class FeatureExtractor {
             for (int j = i + 1; j < functionLeaves.size(); j++) {
                 String separator = Common.EmptyString;
 
-                String path = generatePath(functionLeaves.get(i), functionLeaves.get(j), separator);
-                if (path != Common.EmptyString) {
+                String shortPath = generatePath(functionLeaves.get(i), functionLeaves.get(j), separator, true);
+                String longPath = generatePath(functionLeaves.get(i), functionLeaves.get(j), separator, false);
+                if (shortPath != Common.EmptyString && longPath != Common.EmptyString) {
                     Property source = functionLeaves.get(i).getUserData(Common.PropertyKey);
                     Property target = functionLeaves.get(j).getUserData(Common.PropertyKey);
-                    programFeatures.addFeature(source, path, target);
+                    programFeatures.addFeature(source, shortPath, longPath, target);
                 }
             }
         }
         return programFeatures;
     }
 
-    private String generatePath(Node source, Node target, String separator) {
+    private String generatePath(Node source, Node target, String separator, boolean shortType) {
 
         StringJoiner stringBuilder = new StringJoiner(separator);
         ArrayList<Node> sourceStack = getTreeStack(source);
@@ -145,7 +146,7 @@ public class FeatureExtractor {
                         .toString();
             }
             stringBuilder.add(String.format("%s%s%s",
-                    currentNode.getUserData(Common.PropertyKey).getType(true), childId, upSymbol));
+                    currentNode.getUserData(Common.PropertyKey).getType(shortType), childId, upSymbol));
         }
 
         Node commonNode = sourceStack.get(sourceStack.size() - commonPrefix);
@@ -160,7 +161,7 @@ public class FeatureExtractor {
                     .toString();
         }
         stringBuilder.add(String.format("%s%s",
-                commonNode.getUserData(Common.PropertyKey).getType(true), commonNodeChildId));
+                commonNode.getUserData(Common.PropertyKey).getType(shortType), commonNodeChildId));
 
         for (int i = targetStack.size() - commonPrefix - 1; i >= 0; i--) {
             Node currentNode = targetStack.get(i);
@@ -170,7 +171,7 @@ public class FeatureExtractor {
                         .toString();
             }
             stringBuilder.add(String.format("%s%s%s", downSymbol,
-                    currentNode.getUserData(Common.PropertyKey).getType(true), childId));
+                    currentNode.getUserData(Common.PropertyKey).getType(shortType), childId));
         }
 
         return stringBuilder.toString();
